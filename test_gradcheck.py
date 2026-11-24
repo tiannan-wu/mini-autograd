@@ -1,4 +1,4 @@
-"""
+﻿"""
 W1 验收：数值梯度校验（改进版，防止"悄悄放水"）
 
 原版用的是：
@@ -24,7 +24,7 @@ W1 验收：数值梯度校验（改进版，防止"悄悄放水"）
 
 import random
 
-from autograd_skeleton import Value
+from autograd import Value
 
 random.seed(42)
 
