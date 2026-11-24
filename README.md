@@ -14,7 +14,7 @@ the graph and executes the closures in reverse order.
 ## Results
 
 Gradients are verified against central-difference numerical gradients
-(6 expressions, 12 assertions, `atol=1e-10`, `rtol=1e-6`):
+(6 expressions, 11 assertions, `atol=1e-10`, `rtol=1e-6`):
 
 | test | relative error |
 |---|---|
