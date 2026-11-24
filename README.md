@@ -1,7 +1,9 @@
-# mini-autograd
+﻿# mini-autograd
 
 A ~120-line scalar automatic differentiation engine, written from scratch to
 understand what `loss.backward()` actually does.
+
+> 中文笔记 / Chinese notes: [docs/notes-zh.md](docs/notes-zh.md)
 
 Supports `+  -  *  /  **  exp  log  relu  tanh`. Each operation creates a `Value`
 node holding four things: `data` (the number), `grad` (accumulated gradient),
