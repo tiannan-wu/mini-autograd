@@ -102,6 +102,16 @@ def main():
         return x.exp() / (1.0 + x.exp())      # sigmoid(x)
     results.append(check("exp-sigmoid", f6, [0.5]))
 
+    # --- 7. 菱形 + 共享：同一个节点在两个不同路径上被使用，
+    #        其中一个父节点还是另一条路径的祖先。
+    #        这种图会让某节点在被弹出前被压栈两次，专门考验 visited 的早退检查。
+    #        z = x + y, y = x*a, x = a*2  =>  z = 2a + 2a^2, dz/da = 2 + 4a
+    def f7(a):
+        x = a * 2.0
+        y = x * a
+        return x + y
+    results.append(check("diamond-share", f7, [3.0]))
+
     print()
     if all(results):
         print(f"[PASS] W1 PASSED  ({len(results)} groups, atol={ATOL:g}, rtol={RTOL:g})")
@@ -112,3 +122,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

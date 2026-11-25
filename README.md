@@ -14,7 +14,7 @@ the graph and executes the closures in reverse order.
 ## Results
 
 Gradients are verified against central-difference numerical gradients
-(6 expressions, 11 assertions, `atol=1e-10`, `rtol=1e-6`):
+(7 expressions, 12 assertions, `atol=1e-10`, `rtol=1e-6`):
 
 | test | relative error |
 |---|---|
@@ -23,6 +23,7 @@ Gradients are verified against central-difference numerical gradients
 | relu | 2.1e-12 – 5.6e-12 |
 | div / sub | 3.2e-12 – 1.9e-11 |
 | exp (sigmoid) | 2.5e-11 |
+| diamond-share (共享路径) | 2.1e-13 |
 | deep chain (50 × tanh) | 2.5e-3 * |
 
 \* the 50-layer gradient is only 3.5e-9, so the difference quotient loses

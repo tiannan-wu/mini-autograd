@@ -142,31 +142,27 @@ class Value:
     # ---------- 核心：反向传播 ----------
 
     def backward(self):
-        """从本节点出发，按拓扑序把梯度传回去。
+        topo, visited = [], set()
+        stack = [(self, False)]  # (节点, 是否已展开)
 
-        TODO:
-          1. 用显式栈 + visited 集合做拓扑排序（不要递归，深图会爆栈）
-          2. 把排序结果反过来，从 self 开始依次调用 _backward()
-          3. self.grad 初始化为 1.0（dL/dL = 1）
-        """
-        topo = []
-        visited = set()
+        while stack:
+            node, expanded = stack.pop()
 
-        def visit(node):
+            if expanded:  # 第二次出栈 → 子节点都处理完了
+                topo.append(node)
+                continue
+
             if node in visited:
-                return
-            else:
-                visited.add(node)
+                continue
 
-            for child in node._prev:
-                visit(child)
+            visited.add(node)
 
-            topo.append(node)
-            return
+            stack.append((node, True))  # 先压"收尾"
+            for child in node._prev:  # 再压子节点（后进先出）
+                if child not in visited:
+                    stack.append((child, False))
 
-        visit(self)
         self.grad = 1.0
-
         for node in reversed(topo):
             node._backward()
 
